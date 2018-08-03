@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements Gota.OnRequestPer
          intent.putExtra(Intent.EXTRA_SUBJECT, "بلاغ");
          intent.putExtra(Intent.EXTRA_TEXT,"maha");
          
-
          if (intent.resolveActivity(getPackageManager()) != null) {
              startActivity(intent);
          }
