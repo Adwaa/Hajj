@@ -23,6 +23,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements Gota.OnRequestPermissionsBack {
 
     private ImageView imageView;
+    private String mPath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +67,8 @@ public class MainActivity extends AppCompatActivity implements Gota.OnRequestPer
             Toast.makeText(this,"LAT"+data.getDoubleExtra("MAP_LNG",0),Toast.LENGTH_LONG).show();
         }
         if (requestCode == ImagePicker.IMAGE_PICKER_REQUEST_CODE && resultCode == RESULT_OK) {
-            List<String> mPaths = (List<String>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_PATH);
-            Log.d("TAG",mPaths.get(0));
-            imageView.setImageBitmap(BitmapFactory.decodeFile(mPaths.get(0)));
+            mPath = ((List<String>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_PATH)).get(0);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(mPath));
 
 ///storage/emulated/0/mediapicker/images/715e15cf-2773-4b87-b711-65db3e53aba8.png
             //Your Code
@@ -92,8 +93,14 @@ public class MainActivity extends AppCompatActivity implements Gota.OnRequestPer
          Intent intent = new Intent(Intent.ACTION_SENDTO);
          intent.setData(Uri.parse("mailto:")); // only email apps should handle thispng
          intent.putExtra(Intent.EXTRA_SUBJECT, "بلاغ");
-         intent.putExtra(Intent.EXTRA_TEXT,"maha");
-         
+
+
+  //       File downloadedPic = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "MyApp.jpg");
+//
+//         messageIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(downloadedPic));
+//
+         intent.putExtra(Intent.EXTRA_STREAM,Uri.fromFile(new File(mPath)));
+//         intent.setType("image/png");
          if (intent.resolveActivity(getPackageManager()) != null) {
              startActivity(intent);
          }
