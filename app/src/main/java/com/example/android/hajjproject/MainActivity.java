@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements Gota.OnRequestPer
          intent.setData(Uri.parse("mailto:")); // only email apps should handle thispng
          intent.putExtra(Intent.EXTRA_SUBJECT, "بلاغ");
          intent.putExtra(Intent.EXTRA_TEXT,"maha");
+         
 
          if (intent.resolveActivity(getPackageManager()) != null) {
              startActivity(intent);
