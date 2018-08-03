@@ -23,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements Gota.OnRequestPermissionsBack {
 
     private ImageView imageView;
+    private ImageView imageView2;
     private String mPath;
 
     @Override
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements Gota.OnRequestPer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = (ImageView)findViewById(R.id.imageView);
-
+        imageView2 = (ImageView)findViewById(R.id.imageView2);
         ((Button)findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
             @Override
 
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements Gota.OnRequestPer
         if(resultCode == RESULT_OK && requestCode == 123){
             Toast.makeText(this,"LAT"+data.getDoubleExtra("MAP_LAT",0),Toast.LENGTH_LONG).show();
             Toast.makeText(this,"LAT"+data.getDoubleExtra("MAP_LNG",0),Toast.LENGTH_LONG).show();
+
         }
         if (requestCode == ImagePicker.IMAGE_PICKER_REQUEST_CODE && resultCode == RESULT_OK) {
             mPath = ((List<String>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_PATH)).get(0);
@@ -104,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements Gota.OnRequestPer
          if (intent.resolveActivity(getPackageManager()) != null) {
              startActivity(intent);
          }
+
      }
 
 
